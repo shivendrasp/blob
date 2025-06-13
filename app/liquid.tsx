@@ -1,7 +1,6 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 import { Environment } from "@react-three/drei";
 import { Suspense } from "react";
 import { useRef, useMemo, useEffect, useState } from "react";
@@ -101,10 +100,8 @@ const Blob = ({
 };
 
 const Cube = ({
-  cursor,
   size = 0.3,
 }: {
-  cursor: { x: number; y: number };
   size?: number;
 }) => {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -163,7 +160,7 @@ const Liquid = () => {
             size={size}
             position={[0, 0, 0]}
           />
-          <Cube cursor={mouse} size={size} />
+          <Cube size={size} />
           <Plane />
           <Environment files={"./hdr_1.exr"} background={true} />
           <EffectComposer>
