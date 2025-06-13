@@ -17,7 +17,7 @@ import {
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 
-let Blob = ({
+const Blob = ({
   cursor,
   noiseScale = 1,
   displace = 0.2,
@@ -31,8 +31,8 @@ let Blob = ({
   position?: [number, number, number];
 }) => {
   console.log(cursor);
-  let meshRef = useRef<THREE.Mesh>(null);
-  let noise = useMemo(() => createNoise4D(), []);
+  const meshRef = useRef<THREE.Mesh>(null);
+  const noise = useMemo(() => createNoise4D(), []);
   const baseGeometry = useMemo(
     () => new THREE.IcosahedronGeometry(size, 15),
     [size]
@@ -100,17 +100,16 @@ let Blob = ({
   );
 };
 
-let Cube = ({
+const Cube = ({
   cursor,
   size = 0.3,
 }: {
   cursor: { x: number; y: number };
   size?: number;
 }) => {
-  let meshRef = useRef<THREE.Mesh>(null);
-  let cubeSize = size * 0.2;
-  useFrame(({ clock }) => {
-    const time = clock.getElapsedTime();
+  const meshRef = useRef<THREE.Mesh>(null);
+  const cubeSize = size * 0.2;
+  useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotateZ(0.02);
       meshRef.current.rotateY(0.02);
@@ -124,7 +123,7 @@ let Cube = ({
   );
 };
 
-let Plane = () => {
+const Plane = () => {
   return (
     <mesh position={[0, 0, -20]}>
       <planeGeometry args={[80, 40]} />
@@ -133,7 +132,7 @@ let Plane = () => {
   );
 };
 
-let Liquid = () => {
+const Liquid = () => {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [noiseScale, setNoiseScale] = useState(1);
   const [offset, setOffset] = useState(0.2);
